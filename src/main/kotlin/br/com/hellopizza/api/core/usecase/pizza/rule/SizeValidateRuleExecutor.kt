@@ -5,10 +5,11 @@ import br.com.hellopizza.api.core.usecase.ValidationResult
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
 import java.util.*
+import javax.validation.Valid
 
 @Component
 class SizeValidateRuleExecutor {
-    fun <T, R : SizeValidateRule<T>> validate(rules: List<R>, modification: T, currentSizeState: Mono<Size>): ValidationResult {
+    fun <T, R : SizeValidateRule<T>> validate(rules: List<R>, modification: T, currentSizeState:  @Valid Mono<Size>): ValidationResult {
         val violations: MutableList<String> = LinkedList()
         for (rule in rules) {
             val validationResult = rule.validate(modification, currentSizeState)

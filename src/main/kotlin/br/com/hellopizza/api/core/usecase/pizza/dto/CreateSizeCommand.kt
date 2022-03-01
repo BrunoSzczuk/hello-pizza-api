@@ -2,14 +2,15 @@ package br.com.hellopizza.api.core.usecase.pizza.dto
 
 import br.com.hellopizza.api.core.config.ApplicationCoreProperties
 import br.com.hellopizza.api.core.usecase.Command
-import reactor.core.CoreSubscriber
-import reactor.core.publisher.Mono
+import org.springframework.validation.annotation.Validated
 import java.math.BigDecimal
 import javax.validation.constraints.Max
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
 import javax.validation.constraints.Size
 
+@Validated
 class CreateSizeCommand(
     @field:NotEmpty(message = "The description is mandatory and cannot be blank.")
     @field:Size(
@@ -18,13 +19,13 @@ class CreateSizeCommand(
         max = MAX_DESCRIPTION_SIZE
     )
     val description: String,
+    @field:NotNull(message = "The description is mandatory.")
     @field:Min(message = "The limit of topping must be at least $MIN_TOPPING_LIMIT.", value = MIN_TOPPING_LIMIT)
     @field:Max(message = "The limit of topping must be at most $MAX_TOPPING_LIMIT.", value = MAX_TOPPING_LIMIT)
     val toppingLimit: Long = 1L,
     @field:Min(message = "The topping price must be at least $MIN_TOPPING_PRICE.", value = MIN_TOPPING_PRICE)
     val defaultPrice: BigDecimal = BigDecimal.valueOf(MIN_TOPPING_PRICE)
 ) : Command {
-
 }
 
 private const val MIN_DESCRIPTION_SIZE = 3
