@@ -39,9 +39,13 @@ dependencies {
     implementation("io.r2dbc:r2dbc-h2:0.9.1.RELEASE")
     // https://mvnrepository.com/artifact/io.github.microutils/kotlin-logging
     implementation("io.github.microutils:kotlin-logging:2.1.21")
-
+// https://mvnrepository.com/artifact/me.yaman.can/spring-boot-webflux-h2-console
+    implementation("me.yaman.can:spring-boot-webflux-h2-console:0.0.1")
     // https://mvnrepository.com/artifact/io.r2dbc/r2dbc-postgresql
     implementation("io.r2dbc:r2dbc-postgresql:0.8.11.RELEASE")
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    // For flyway use
+    implementation("org.postgresql:postgresql:42.3.3")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.5.0.Beta2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

@@ -1,7 +1,6 @@
 package br.com.hellopizza.api.core.usecase.pizza.dto
 
 import br.com.hellopizza.api.core.domain.pizza.Size
-import reactor.core.publisher.Mono
 import java.math.BigDecimal
 
 data class SizeSumarryDTO(
@@ -11,13 +10,13 @@ data class SizeSumarryDTO(
 ) {
     companion object {
 
-        fun from(size: Mono<Size>) = size.map {
+        fun from(size: Size) =
             SizeSumarryDTO(
-                id = it.id!!,
-                description = it.description,
-                defaultPrice = it.defaultPrice,
+                id = size.id!!,
+                description = size.description,
+                defaultPrice = size.defaultPrice,
             )
-        }
+
 
     }
 }

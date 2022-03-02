@@ -10,6 +10,7 @@ import java.util.*
 class AlreadyExistsSizeRule(private val applicationCoreProperties: ApplicationCoreProperties) : CreateSizeValidationRule {
     //RULE: Once created, the size must not be updated or recreated.
     override fun validate(modification: Mono<Size>, currentSizeState: Mono<Size>): ValidationResult {
+        currentSizeState.subscribe()
         val valid = Objects.isNull(currentSizeState)
         return ValidationResult.validOrWithError(valid, applicationCoreProperties.error.sizeAlreadyExistsKey!!)
     }

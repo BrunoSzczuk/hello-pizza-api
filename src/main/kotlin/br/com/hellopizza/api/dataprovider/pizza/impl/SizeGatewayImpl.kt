@@ -16,7 +16,7 @@ class SizeGatewayImpl(private var repository: SizeRepository) : SizeGateway {
     val converter: SizeEntityConverter = Mappers.getMapper(SizeEntityConverter::class.java)
     private val logger = KotlinLogging.logger {}
     override fun findByDescriptionAndToppingLimitAndDefaultPrice(description: String, toppingLimit: Long, defaultPrice: BigDecimal): Mono<Size> {
-        logger.info { "Hitting on Database. Looking for a size with {description: ${description}, toppingLimit: ${toppingLimit}, defaultPrice: ${defaultPrice}." }
+        logger.info { "Hitting on Database. Looking for a size with {description: ${description}, toppingLimit: ${toppingLimit}, defaultPrice: ${defaultPrice}}." }
         return repository.findByDescriptionAndToppingLimitAndDefaultPrice(description, toppingLimit, defaultPrice).map { converter.convertFromEntity(it) }
     }
 
@@ -32,7 +32,11 @@ class SizeGatewayImpl(private var repository: SizeRepository) : SizeGateway {
 
     override fun save(data: Size): Mono<Size> {
         logger.info { "Hitting on Database. Trying to save a new size." }
-        return repository.save(converter.convertToEntity(data)).map { converter.convertFromEntity(it) };
+        val size = repository.save(converter.convertToEntity(data)).map {
+            logger.info { "Save a new size successfully. Size id: ${it.id}." }
+            converter.convertFromEntity(it)
+        }
+        return size
     }
 
 

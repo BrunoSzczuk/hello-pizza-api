@@ -1,15 +1,7 @@
 package br.com.hellopizza.api
 
-import br.com.hellopizza.api.core.config.ApplicationCoreProperties
-import br.com.hellopizza.api.dataprovider.pizza.SizeRepository
-import br.com.hellopizza.api.dataprovider.pizza.model.IdSizeEntity
-import br.com.hellopizza.api.dataprovider.pizza.model.SizeEntity
-import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
-import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
-import org.springframework.context.annotation.Bean
-import java.math.BigDecimal
 
 @SpringBootApplication
 class ApiApplication /*{
