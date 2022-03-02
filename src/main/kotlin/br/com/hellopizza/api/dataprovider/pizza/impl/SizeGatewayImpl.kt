@@ -33,7 +33,7 @@ class SizeGatewayImpl(private var repository: SizeRepository) : SizeGateway {
     override fun save(data: Size): Mono<Size> {
         logger.info { "Hitting on Database. Trying to save a new size." }
         val size = repository.save(converter.convertToEntity(data)).map {
-            logger.info { "Save a new size successfully. Size id: ${it.id}." }
+            logger.info { "Saved a new size successfully. Size id: ${it.id}." }
             converter.convertFromEntity(it)
         }
         return size

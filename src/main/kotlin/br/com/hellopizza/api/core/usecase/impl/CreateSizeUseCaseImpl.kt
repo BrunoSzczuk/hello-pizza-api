@@ -25,7 +25,7 @@ class CreateSizeUseCaseImpl(
             val newSize = Size(null, description = it.description, toppingLimit = it.toppingLimit, defaultPrice = it.defaultPrice)
             var currentState = sizeGateway.findByDescriptionAndToppingLimitAndDefaultPrice(it.description, it.toppingLimit, it.defaultPrice)
 
-            val validationResult = executor.validate(rules, Mono.just(newSize), currentState)
+            val validationResult = executor.validate(rules, Mono.just(newSize), currentState.blockOptional().orElse(null))
             if (validationResult.valid) {
                 // Operations that have violations should not be saved in the internal state of the application.
                 currentState = sizeGateway.save(newSize)

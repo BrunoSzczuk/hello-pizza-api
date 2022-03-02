@@ -9,7 +9,6 @@ import org.springframework.core.env.Environment
 @Configuration
 class FlywayConfig(private val env: Environment) {
 
-
     @Bean(initMethod = "migrate")
     fun flyway(): Flyway? {
         return Flyway(
