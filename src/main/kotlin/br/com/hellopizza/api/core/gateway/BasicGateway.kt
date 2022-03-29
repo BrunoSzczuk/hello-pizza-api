@@ -1,10 +1,10 @@
 package br.com.hellopizza.api.core.gateway
 
-import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
+import kotlinx.coroutines.flow.Flow
+import java.util.*
 
 interface BasicGateway<T, ID> {
-    fun findById(id: ID): Mono<T>
-    fun findAll(): Flux<T>
-    fun save(data: T): Mono<T>
+    suspend fun findById(id: ID): Optional<T>
+    fun findAll(): Flow<T>
+    suspend fun save(data: T): T
 }

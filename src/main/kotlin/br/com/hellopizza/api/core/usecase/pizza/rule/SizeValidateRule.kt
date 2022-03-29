@@ -1,11 +1,11 @@
 package br.com.hellopizza.api.core.usecase.pizza.rule
 
-import br.com.hellopizza.api.core.domain.pizza.Size
 import br.com.hellopizza.api.core.usecase.ValidationResult
 import org.springframework.core.Ordered
+import java.util.*
 
 interface SizeValidateRule<T> : Ordered {
-    fun validate(modification: T, currentSizeState: Size?): ValidationResult
+    suspend fun validate(modification: T, currentSizeState: Optional<T>): ValidationResult
     override fun getOrder(): Int {
         return Ordered.LOWEST_PRECEDENCE
     }

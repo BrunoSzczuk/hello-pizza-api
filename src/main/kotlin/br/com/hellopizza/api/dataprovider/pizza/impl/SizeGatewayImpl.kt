@@ -4,39 +4,37 @@ import br.com.hellopizza.api.core.domain.pizza.Size
 import br.com.hellopizza.api.core.gateway.pizza.SizeGateway
 import br.com.hellopizza.api.dataprovider.pizza.SizeRepository
 import br.com.hellopizza.api.dataprovider.pizza.converter.SizeEntityConverter
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import mu.KotlinLogging
 import org.mapstruct.factory.Mappers
 import org.springframework.stereotype.Service
-import reactor.core.publisher.Flux
-import reactor.core.publisher.Mono
 import java.math.BigDecimal
+import java.util.*
 
 @Service
 class SizeGatewayImpl(private var repository: SizeRepository) : SizeGateway {
     val converter: SizeEntityConverter = Mappers.getMapper(SizeEntityConverter::class.java)
     private val logger = KotlinLogging.logger {}
-    override fun findByDescriptionAndToppingLimitAndDefaultPrice(description: String, toppingLimit: Long, defaultPrice: BigDecimal): Mono<Size> {
+    override suspend fun findByDescriptionAndToppingLimitAndDefaultPrice(description: String, toppingLimit: Long, defaultPrice: BigDecimal): Optional<Size> {
         logger.info { "Hitting on Database. Looking for a size with {description: ${description}, toppingLimit: ${toppingLimit}, defaultPrice: ${defaultPrice}}." }
-        return repository.findByDescriptionAndToppingLimitAndDefaultPrice(description, toppingLimit, defaultPrice).map { converter.convertFromEntity(it) }
+        return Optional.ofNullable(repository.findByDescriptionAndToppingLimitAndDefaultPrice(description, toppingLimit, defaultPrice)).map { converter.convertFromEntity(it) }
     }
 
-    override fun findById(id: Long): Mono<Size> {
+    override suspend fun findById(id: Long): Optional<Size> {
         logger.info { "Hitting on Database. Looking for a size with id ${id}." }
-        return repository.findById(id).map { converter.convertFromEntity(it) }
+        return Optional.ofNullable(repository.findById(id)).map { converter.convertFromEntity(it) }
     }
 
-    override fun findAll(): Flux<Size> {
+    override fun findAll(): Flow<Size> {
         logger.info { "Hitting on Database. Looking for all sizes." }
         return repository.findAll().map { converter.convertFromEntity(it) }
     }
 
-    override fun save(data: Size): Mono<Size> {
+    override suspend fun save(data: Size): Size {
         logger.info { "Hitting on Database. Trying to save a new size." }
-        val size = repository.save(converter.convertToEntity(data)).map {
-            logger.info { "Saved a new size successfully. Size id: ${it.id}." }
-            converter.convertFromEntity(it)
-        }
-        return size
+        return converter.convertFromEntity(repository.save(converter.convertToEntity(data)))
+
     }
 
 
