@@ -1,14 +1,9 @@
 package br.com.hellopizza.api.core.usecase.pizza.dto
 
-import br.com.hellopizza.api.core.config.ApplicationCoreProperties
 import br.com.hellopizza.api.core.usecase.Command
 import org.springframework.validation.annotation.Validated
 import java.math.BigDecimal
-import javax.validation.constraints.Max
-import javax.validation.constraints.Min
-import javax.validation.constraints.NotEmpty
-import javax.validation.constraints.NotNull
-import javax.validation.constraints.Size
+import javax.validation.constraints.*
 
 @Validated
 class CreateSizeCommand(
@@ -25,8 +20,7 @@ class CreateSizeCommand(
     val toppingLimit: Long = 1L,
     @field:Min(message = "The topping price must be at least $MIN_TOPPING_PRICE.", value = MIN_TOPPING_PRICE)
     val defaultPrice: BigDecimal = BigDecimal.valueOf(MIN_TOPPING_PRICE)
-) : Command {
-}
+) : Command
 
 private const val MIN_DESCRIPTION_SIZE = 3
 private const val MIN_TOPPING_LIMIT = 1L

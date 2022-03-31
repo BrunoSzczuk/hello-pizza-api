@@ -7,7 +7,7 @@ import br.com.hellopizza.api.core.usecase.pizza.dto.CreateSizeCommand
 import br.com.hellopizza.api.core.usecase.pizza.dto.SizeResult
 import br.com.hellopizza.api.core.usecase.pizza.dto.converter.SizeDTOConverter
 import br.com.hellopizza.api.core.usecase.pizza.rule.CreateSizeValidationRule
-import br.com.hellopizza.api.core.usecase.pizza.rule.SizeValidateRuleExecutor
+import br.com.hellopizza.api.core.usecase.pizza.rule.ValidateRuleExecutor
 import org.mapstruct.factory.Mappers
 import org.springframework.stereotype.Service
 import java.util.*
@@ -17,7 +17,7 @@ import javax.validation.Valid
 class CreateSizeUseCaseImpl(
     private val sizeGateway: SizeGateway,
     private val rules: List<CreateSizeValidationRule>,
-    private val executor: SizeValidateRuleExecutor
+    private val executor: ValidateRuleExecutor
 ) : CreateSizeUseCase {
     override suspend fun execute(@Valid command: CreateSizeCommand): SizeResult {
         val converter: SizeDTOConverter = Mappers.getMapper(SizeDTOConverter::class.java)

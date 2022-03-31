@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component
 import java.util.*
 
 @Component
-class SizeValidateRuleExecutor {
-    suspend fun <T, R : SizeValidateRule<T>> validate(rules: List<R>, modification: T, currentSizeState: Optional<T>): ValidationResult {
+class ValidateRuleExecutor {
+    suspend fun <T, R : ValidateRule<T>> validate(rules: List<R>, modification: T, currentSizeState: Optional<T>): ValidationResult {
         val violations: MutableList<String> = LinkedList()
         for (rule in rules) {
             val validationResult = rule.validate(modification, currentSizeState)
