@@ -10,7 +10,8 @@ import java.util.*
 @Component
 class AlreadyExistsSizeRule(private val applicationCoreProperties: ApplicationCoreProperties) : CreateSizeValidationRule {
     //RULE: Once created, the size must not be updated or recreated.
-    override suspend fun validate(modification: Size, currentSizeState: Optional<Size>): ValidationResult {
+    override suspend fun validate(modification: Optional<Size>,
+                                  currentSizeState: Optional<Size>): ValidationResult {
         val valid = currentSizeState.isEmpty
         return ValidationResult.validOrWithError(valid, applicationCoreProperties.error.sizeAlreadyExistsKey!!)
     }

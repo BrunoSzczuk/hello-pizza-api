@@ -5,8 +5,8 @@ import java.io.Serializable
 import java.math.BigDecimal
 
 data class ToppingEntity(
-    @Id
-    val id: Long,
-    val description: String,
-    val additionalPrice: BigDecimal = BigDecimal.ZERO
+        @Id
+        val id: Long,
+        val description: String,
+        val additionalPrice: BigDecimal = BigDecimal.ZERO
 ) : Serializable

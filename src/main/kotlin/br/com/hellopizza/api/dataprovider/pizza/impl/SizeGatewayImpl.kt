@@ -16,19 +16,29 @@ import java.util.*
 class SizeGatewayImpl(private var repository: SizeRepository) : SizeGateway {
     val converter: SizeEntityConverter = Mappers.getMapper(SizeEntityConverter::class.java)
     private val logger = KotlinLogging.logger {}
-    override suspend fun findByDescriptionAndToppingLimitAndDefaultPrice(description: String, toppingLimit: Long, defaultPrice: BigDecimal): Optional<Size> {
+    override suspend fun findByDescriptionAndToppingLimitAndDefaultPrice(description: String,
+                                                                         toppingLimit: Long,
+                                                                         defaultPrice: BigDecimal): Optional<Size> {
         logger.info { "Hitting on Database. Looking for a size with {description: ${description}, toppingLimit: ${toppingLimit}, defaultPrice: ${defaultPrice}}." }
-        return Optional.ofNullable(repository.findByDescriptionAndToppingLimitAndDefaultPrice(description, toppingLimit, defaultPrice)).map { converter.convertFromEntity(it) }
+        return Optional.ofNullable(repository.findByDescriptionAndToppingLimitAndDefaultPrice(description, toppingLimit, defaultPrice))
+                .map { converter.convertFromEntity(it) }
     }
 
     override suspend fun findById(id: Long): Optional<Size> {
         logger.info { "Hitting on Database. Looking for a size with id ${id}." }
-        return Optional.ofNullable(repository.findById(id)).map { converter.convertFromEntity(it) }
+        return Optional.ofNullable(repository.findById(id))
+                .map { converter.convertFromEntity(it) }
+    }
+
+    override suspend fun deleteById(id: Long) {
+        logger.info { "Hitting on Database. Deleting a size with id ${id}." }
+        repository.deleteById(id)
     }
 
     override fun findAll(): Flow<Size> {
         logger.info { "Hitting on Database. Looking for all sizes." }
-        return repository.findAll().map { converter.convertFromEntity(it) }
+        return repository.findAll()
+                .map { converter.convertFromEntity(it) }
     }
 
     override suspend fun save(data: Size): Size {

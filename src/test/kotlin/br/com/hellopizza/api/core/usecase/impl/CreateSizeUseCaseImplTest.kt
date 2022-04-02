@@ -1,11 +1,12 @@
 package br.com.hellopizza.api.core.usecase.impl
 
 import br.com.hellopizza.api.core.domain.pizza.Size
-import br.com.hellopizza.api.core.domain.pizza.createSizeCommand
-import br.com.hellopizza.api.core.domain.pizza.prepareForCreate
-import br.com.hellopizza.api.core.domain.pizza.summaryDTO
 import br.com.hellopizza.api.core.gateway.pizza.SizeGateway
 import br.com.hellopizza.api.core.usecase.ValidationResult
+import br.com.hellopizza.api.core.usecase.pizza.dto.createSizeCommand
+import br.com.hellopizza.api.core.usecase.pizza.dto.prepareForCreate
+import br.com.hellopizza.api.core.usecase.pizza.dto.summaryDTO
+import br.com.hellopizza.api.core.usecase.pizza.impl.CreateSizeUseCaseImpl
 import br.com.hellopizza.api.core.usecase.pizza.rule.CreateSizeValidationRule
 import br.com.hellopizza.api.core.usecase.pizza.rule.ValidateRuleExecutor
 import com.nhaarman.mockitokotlin2.mock
@@ -32,9 +33,9 @@ internal class CreateSizeUseCaseImplTest {
         //Given
         val preparedSize = size.prepareForCreate()
         `when`(sizeGateway.findByDescriptionAndToppingLimitAndDefaultPrice(size.description, size.toppingLimit, size.defaultPrice))
-            .thenReturn(Optional.empty())
-        `when`(executor.validate(rules, preparedSize, Optional.empty()))
-            .thenReturn(ValidationResult.ok())
+                .thenReturn(Optional.empty())
+        `when`(executor.validate(rules, Optional.of(preparedSize), Optional.empty()))
+                .thenReturn(ValidationResult.ok())
         `when`(sizeGateway.save(preparedSize)).thenReturn(size)
 
         //When

@@ -6,5 +6,7 @@ import java.math.BigDecimal
 import java.util.*
 
 interface SizeGateway : BasicGateway<Size, Long> {
-    suspend fun findByDescriptionAndToppingLimitAndDefaultPrice(description: String, toppingLimit: Long, defaultPrice: BigDecimal): Optional<Size>
+    suspend fun findByDescriptionAndToppingLimitAndDefaultPrice(description: String,
+                                                                toppingLimit: Long,
+                                                                defaultPrice: BigDecimal): Optional<Size>
 }

@@ -7,9 +7,9 @@ import java.math.BigDecimal
 
 @Table("size")
 data class SizeEntity(
-    @Id
-    val id: Long? = null,
-    val description: String,
-    val toppingLimit: Long = 1L,
-    val defaultPrice: BigDecimal = BigDecimal.ZERO
+        @Id
+        val id: Long? = null,
+        val description: String,
+        val toppingLimit: Long = 1L,
+        val defaultPrice: BigDecimal = BigDecimal.ZERO
 ) : Serializable

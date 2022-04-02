@@ -7,5 +7,7 @@ import java.math.BigDecimal
 
 @Repository
 interface SizeRepository : CoroutineCrudRepository<SizeEntity, Long> {
-    suspend fun findByDescriptionAndToppingLimitAndDefaultPrice(description: String, toppingLimit: Long, defaultPrice: BigDecimal): SizeEntity
+    suspend fun findByDescriptionAndToppingLimitAndDefaultPrice(description: String,
+                                                                toppingLimit: Long,
+                                                                defaultPrice: BigDecimal): SizeEntity
 }
