@@ -1,11 +1,11 @@
 package br.com.hellopizza.api.core.usecase.pizza.impl
 
+import br.com.hellopizza.api.core.exception.SizeNotFoundException
 import br.com.hellopizza.api.core.gateway.pizza.SizeGateway
 import br.com.hellopizza.api.core.usecase.pizza.DeleteSizeUseCase
 import br.com.hellopizza.api.core.usecase.pizza.dto.DeleteSizeCommand
 import br.com.hellopizza.api.core.usecase.pizza.rule.DeleteSizeValidationRule
 import br.com.hellopizza.api.core.usecase.pizza.rule.ValidateRuleExecutor
-import br.com.hellopizza.api.entrypoint.pizza.SizeNotFoundException
 import org.springframework.stereotype.Service
 import java.util.*
 
