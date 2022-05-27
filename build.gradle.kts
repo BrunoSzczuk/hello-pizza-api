@@ -37,6 +37,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("io.r2dbc:r2dbc-h2:0.9.1.RELEASE")
+    // https://mvnrepository.com/artifact/com.github.f4b6a3/uuid-creator
+    implementation("com.github.f4b6a3:uuid-creator:4.6.1")
+
     // https://mvnrepository.com/artifact/io.github.microutils/kotlin-logging
     implementation("io.github.microutils:kotlin-logging:2.1.21")
     // https://mvnrepository.com/artifact/me.yaman.can/spring-boot-webflux-h2-console

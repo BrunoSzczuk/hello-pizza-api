@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
+import java.util.*
 import javax.validation.Valid
 
 @RestController
@@ -33,12 +34,12 @@ class SizeEndpoint {
 
 
     @GetMapping("/{id}")
-    suspend fun findById(@PathVariable id: Long) = ResponseEntity.ok(
+    suspend fun findById(@PathVariable id: UUID) = ResponseEntity.ok(
         sizeController.findById(id)
             .summaryDTO()
     )
 
     @DeleteMapping("/{id}")
-    suspend fun deleteById(@PathVariable id: Long) = ResponseEntity.ok(sizeController.delete(id))
+    suspend fun deleteById(@PathVariable id: UUID) = ResponseEntity.ok(sizeController.delete(id))
 
 }

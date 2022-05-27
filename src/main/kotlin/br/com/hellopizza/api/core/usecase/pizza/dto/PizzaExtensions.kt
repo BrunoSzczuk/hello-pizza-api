@@ -6,11 +6,12 @@ fun Size.createSizeCommand() =
     CreateSizeCommand(description = description, toppingLimit = toppingLimit, defaultPrice = defaultPrice)
 
 fun Size.updateSizeCommand() =
-    UpdateSizeCommand(id = id!!, description = description, toppingLimit = toppingLimit, defaultPrice = defaultPrice)
+    UpdateSizeCommand(id = id, description = description, toppingLimit = toppingLimit, defaultPrice = defaultPrice)
 
 fun Size.deleteSizeCommand() =
-    DeleteSizeCommand(id = id!!)
+    DeleteSizeCommand(id = id)
 
-fun Size.summaryDTO() = SizeSumarryDTO(id = id!!, description = description, defaultPrice = defaultPrice)
+fun Size.summaryDTO() = SizeSumarryDTO(id = id, description = description, defaultPrice = defaultPrice)
 fun Size.prepareForCreate() =
-    Size(id = null, description = description, toppingLimit = toppingLimit, defaultPrice = defaultPrice)
+    Size(description = description, toppingLimit = toppingLimit, defaultPrice = defaultPrice)
+

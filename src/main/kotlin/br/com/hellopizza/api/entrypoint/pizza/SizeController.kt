@@ -10,6 +10,7 @@ import br.com.hellopizza.api.core.usecase.pizza.dto.CreateSizeCommand
 import br.com.hellopizza.api.core.usecase.pizza.dto.DeleteSizeCommand
 import br.com.hellopizza.api.core.usecase.pizza.dto.UpdateSizeCommand
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class SizeController(
@@ -21,9 +22,9 @@ class SizeController(
 
     suspend fun create(createSizeCommand: CreateSizeCommand) = createSizeUseCase.execute(createSizeCommand)
     suspend fun update(updateSizeCommand: UpdateSizeCommand) = updateSizeUseCase.execute(updateSizeCommand)
-    suspend fun findById(id: Long): Size = sizeGateway.findById(id)
+    suspend fun findById(id: UUID): Size = sizeGateway.findById(id)
         .orElseThrow { SizeNotFoundException(id) }
 
-    suspend fun delete(id: Long) = deleteSizeUseCase.execute(DeleteSizeCommand(id))
+    suspend fun delete(id: UUID) = deleteSizeUseCase.execute(DeleteSizeCommand(id))
 
 }

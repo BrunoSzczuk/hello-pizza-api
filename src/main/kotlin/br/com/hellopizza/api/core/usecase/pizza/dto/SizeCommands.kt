@@ -2,6 +2,7 @@ package br.com.hellopizza.api.core.usecase.pizza.dto
 
 import br.com.hellopizza.api.core.usecase.Command
 import java.math.BigDecimal
+import java.util.*
 import javax.validation.constraints.*
 
 
@@ -22,15 +23,13 @@ sealed class SizeCommand(
 ) : Command
 
 data class DeleteSizeCommand(
-    @field:Min(1)
     @field:NotNull(message = "Id must not be null.")
-    val id: Long
+    val id: UUID
 ) : Command
 
 data class UpdateSizeCommand(
-    @field:Min(1)
     @field:NotNull(message = "Id must not be null.")
-    val id: Long,
+    val id: UUID,
     override val description: String,
     override val toppingLimit: Long = 1L,
     override val defaultPrice: BigDecimal = BigDecimal.valueOf(MIN_TOPPING_PRICE)

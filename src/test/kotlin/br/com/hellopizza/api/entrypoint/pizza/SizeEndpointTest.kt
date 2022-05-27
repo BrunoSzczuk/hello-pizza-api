@@ -1,5 +1,6 @@
 package br.com.hellopizza.api.entrypoint.pizza
 
+import br.com.hellopizza.api.core.domain.pizza.SIZE_ID_MEDIUM
 import br.com.hellopizza.api.core.domain.pizza.Size
 import br.com.hellopizza.api.core.domain.pizza.largeSize
 import br.com.hellopizza.api.core.domain.pizza.smallSize
@@ -59,7 +60,7 @@ internal class SizeEndpointTest {
 
     @Test
     fun `should return HTTP 400 with a blank description`() = runTest {
-        val size = Size(description = "", id = null)
+        val size = Size(description = "")
         val command = size.createSizeCommand()
 
         webTestClient.post()
@@ -124,7 +125,7 @@ internal class SizeEndpointTest {
 
     @Test
     fun `should return HTTP 404 when try to delete an nonexistent size`() = runTest {
-        val command = DeleteSizeCommand(id = 1L)
+        val command = DeleteSizeCommand(id = SIZE_ID_MEDIUM)
         `when`(controller.delete(eq(command.id))).thenThrow(SizeNotFoundException(command.id))
         webTestClient.delete()
             .uri("${BASE_PATH}/${command.id}")
@@ -138,7 +139,7 @@ internal class SizeEndpointTest {
     @Test
     fun `should return HTTP 404 when try to find an nonexistent size`() = runTest {
         val size = largeSize()
-        val id = size.id!!
+        val id = size.id
         `when`(controller.findById(eq(id))).thenThrow(SizeNotFoundException(id))
         webTestClient.get()
             .uri("${BASE_PATH}/${size.id}")
@@ -152,7 +153,7 @@ internal class SizeEndpointTest {
     @Test
     fun `should return HTTP 200 when a size is found`() = runTest {
         val size = largeSize()
-        val id = size.id!!
+        val id = size.id
         val sumarryDto = size.summaryDTO()
         `when`(controller.findById(eq(id))).thenReturn(size)
         val jsonContent = ObjectMapper().writeValueAsString(sumarryDto)

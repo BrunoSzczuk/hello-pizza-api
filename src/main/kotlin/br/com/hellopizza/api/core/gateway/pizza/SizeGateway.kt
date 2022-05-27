@@ -5,8 +5,10 @@ import br.com.hellopizza.api.core.gateway.BasicGateway
 import java.math.BigDecimal
 import java.util.*
 
-interface SizeGateway : BasicGateway<Size, Long> {
-    suspend fun findByDescriptionAndToppingLimitAndDefaultPrice(description: String,
-                                                                toppingLimit: Long,
-                                                                defaultPrice: BigDecimal): Optional<Size>
+interface SizeGateway : BasicGateway<Size, UUID> {
+    suspend fun findByDescriptionAndToppingLimitAndDefaultPrice(
+        description: String,
+        toppingLimit: Long,
+        defaultPrice: BigDecimal
+    ): Optional<Size>
 }

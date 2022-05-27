@@ -1,10 +1,11 @@
 package br.com.hellopizza.api.core.domain.pizza
 
 import java.math.BigDecimal
+import java.util.*
 
-const val SIZE_ID_SMALL = 1L
-const val SIZE_ID_MEDIUM = 2L
-const val SIZE_ID_LARGE = 3L
+val SIZE_ID_SMALL: UUID = UUID.fromString("d8f9c8e0-c8e0-11ea-bc55-0242ac130003")
+val SIZE_ID_MEDIUM: UUID = UUID.fromString("d8f9c8e0-c8e0-11ea-bc55-0242ac130004")
+val SIZE_ID_LARGE: UUID = UUID.fromString("d8f9c8e0-c8e0-11ea-bc55-0242ac130005")
 const val SIZE_DESCRIPTION_SMALL = "Small Size"
 const val SIZE_DESCRIPTION_MEDIUM = "Medium Size"
 const val SIZE_DESCRIPTION_LARGE = "Large Size"

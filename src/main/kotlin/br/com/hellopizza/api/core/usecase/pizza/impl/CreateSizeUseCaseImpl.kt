@@ -19,7 +19,6 @@ class CreateSizeUseCaseImpl(
 ) : CreateSizeUseCase {
     override suspend fun execute(command: CreateSizeCommand): SizeResult {
         val newSize = Size(
-            null,
             description = command.description,
             toppingLimit = command.toppingLimit,
             defaultPrice = command.defaultPrice

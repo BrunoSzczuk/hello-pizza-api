@@ -24,13 +24,13 @@ class SizeGatewayImpl(private var repository: SizeRepository) : SizeGateway {
                 .map { converter.convertFromEntity(it) }
     }
 
-    override suspend fun findById(id: Long): Optional<Size> {
+    override suspend fun findById(id: UUID): Optional<Size> {
         logger.info { "Hitting on Database. Looking for a size with id ${id}." }
         return Optional.ofNullable(repository.findById(id))
-                .map { converter.convertFromEntity(it) }
+            .map { converter.convertFromEntity(it) }
     }
 
-    override suspend fun deleteById(id: Long) {
+    override suspend fun deleteById(id: UUID) {
         logger.info { "Hitting on Database. Deleting a size with id ${id}." }
         repository.deleteById(id)
     }
@@ -42,7 +42,7 @@ class SizeGatewayImpl(private var repository: SizeRepository) : SizeGateway {
     }
 
     override suspend fun save(data: Size): Size {
-        logger.info { "Hitting on Database. Trying to save a new size." }
+        logger.info { "Hitting on Database. Trying to save a size." }
         return converter.convertFromEntity(repository.save(converter.convertToEntity(data)))
 
     }
