@@ -1,4 +1,4 @@
-package br.com.hellopizza.api.core.usecase.impl
+package br.com.hellopizza.api.core.usecase.pizza.impl
 
 import br.com.hellopizza.api.core.domain.pizza.Size
 import br.com.hellopizza.api.core.gateway.pizza.SizeGateway
@@ -6,7 +6,6 @@ import br.com.hellopizza.api.core.usecase.ValidationResult
 import br.com.hellopizza.api.core.usecase.pizza.dto.createSizeCommand
 import br.com.hellopizza.api.core.usecase.pizza.dto.prepareForCreate
 import br.com.hellopizza.api.core.usecase.pizza.dto.summaryDTO
-import br.com.hellopizza.api.core.usecase.pizza.impl.CreateSizeUseCaseImpl
 import br.com.hellopizza.api.core.usecase.pizza.rule.CreateSizeValidationRule
 import br.com.hellopizza.api.core.usecase.pizza.rule.ValidateRuleExecutor
 import com.nhaarman.mockitokotlin2.mock
@@ -16,8 +15,8 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import org.mockito.Mockito.`when`
 import org.mockito.Mockito.never
+import org.mockito.Mockito.`when`
 import java.util.*
 
 internal class CreateSizeUseCaseImplTest {
