@@ -14,5 +14,6 @@ data class SizeEntity(
     val id: UUID,
     val description: String,
     val toppingLimit: Long = 1L,
-    val defaultPrice: BigDecimal = BigDecimal.ZERO
+    val defaultPrice: BigDecimal = BigDecimal.ZERO,
+    val enabled: Boolean = true
 ) : Serializable, BaseView<UUID>(id)

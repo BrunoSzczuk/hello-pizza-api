@@ -13,6 +13,10 @@ abstract class BaseView<ID>(
     @Id
     override fun getId() = id
 
+    @org.springframework.data.annotation.Transient
     override fun isNew() = isNew
+    fun setNew(new: Boolean) {
+        isNew = new
+    }
 
 }

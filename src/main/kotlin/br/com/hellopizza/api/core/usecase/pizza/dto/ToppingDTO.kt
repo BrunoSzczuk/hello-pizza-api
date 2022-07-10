@@ -3,17 +3,17 @@ package br.com.hellopizza.api.core.usecase.pizza.dto
 import java.math.BigDecimal
 import java.util.*
 
-data class SizeDTO(
+data class ToppingSummaryDTO(
     val id: UUID,
     val description: String,
-    val defaultPrice: BigDecimal = BigDecimal.ZERO,
-    val enabled: Boolean = true,
-    val toppingLimit: Long = 1L
-)
-
-data class SizeSumarryDTO(
-    val id: UUID,
-    val description: String,
-    val defaultPrice: BigDecimal = BigDecimal.ZERO,
+    val additionalPrice: BigDecimal = BigDecimal.ZERO,
     val enabled: Boolean = true
 )
+
+data class ToppingDTO(
+    val id: UUID,
+    val description: String,
+    val additionalPrice: BigDecimal = BigDecimal.ZERO,
+    val enabled: Boolean = true
+)
+

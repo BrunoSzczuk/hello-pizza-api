@@ -23,13 +23,15 @@ class UpdateSizeUseCaseImpl(
             id = command.id,
             description = command.description,
             toppingLimit = command.toppingLimit,
-            defaultPrice = command.defaultPrice
+            defaultPrice = command.defaultPrice,
+            enabled = command.enabled,
         )
         var currentState = sizeGateway.findById(command.id)
             .orElseThrow { SizeNotFoundException(command.id) }
         val validationResult = executor.validate(rules, Optional.of(newSize), Optional.of(currentState))
         if (validationResult.valid) {
             // Operations that have violations should not be saved in the internal state of the application.
+            newSize.isNew = false
             currentState = sizeGateway.save(newSize)
         }
         return SizeResult.of(

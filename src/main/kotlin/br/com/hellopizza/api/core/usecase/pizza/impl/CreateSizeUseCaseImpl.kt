@@ -21,7 +21,8 @@ class CreateSizeUseCaseImpl(
         val newSize = Size(
             description = command.description,
             toppingLimit = command.toppingLimit,
-            defaultPrice = command.defaultPrice
+            defaultPrice = command.defaultPrice,
+            enabled = command.enabled,
         )
         var currentState = sizeGateway.findByDescriptionAndToppingLimitAndDefaultPrice(
             command.description,

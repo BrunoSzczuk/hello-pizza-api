@@ -1,9 +1,7 @@
 package br.com.hellopizza.api.entrypoint.pizza
 
-import br.com.hellopizza.api.core.usecase.pizza.dto.CreateSizeCommand
-import br.com.hellopizza.api.core.usecase.pizza.dto.SizeResult
-import br.com.hellopizza.api.core.usecase.pizza.dto.UpdateSizeCommand
-import br.com.hellopizza.api.core.usecase.pizza.dto.summaryDTO
+import br.com.hellopizza.api.core.usecase.pizza.dto.*
+import kotlinx.coroutines.flow.map
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -36,8 +34,14 @@ class SizeEndpoint {
     @GetMapping("/{id}")
     suspend fun findById(@PathVariable id: UUID) = ResponseEntity.ok(
         sizeController.findById(id)
-            .summaryDTO()
+            .sizeDTO()
     )
+
+    @GetMapping
+    suspend fun findAll(@RequestParam(value = "showDisabled", defaultValue = "false") showDisabled: Boolean) =
+        ResponseEntity.ok(
+            sizeController.findAll(showDisabled).map { it.summaryDTO() }
+        )
 
     @DeleteMapping("/{id}")
     suspend fun deleteById(@PathVariable id: UUID) = ResponseEntity.ok(sizeController.delete(id))

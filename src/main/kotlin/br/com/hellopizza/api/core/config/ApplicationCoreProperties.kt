@@ -8,6 +8,7 @@ class ApplicationCoreProperties {
 
     class ErrorProperties {
         var sizeAlreadyExistsKey: String? = null
+        var toppingAlreadyExistsKey: String? = null
     }
 
 }

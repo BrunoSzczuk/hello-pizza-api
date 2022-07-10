@@ -12,3 +12,4 @@ application:
   core:
     error:
       size-already-exists-key: "size-already-exists"
+      topping-already-exists-key: "topping-already-exists"

@@ -22,6 +22,7 @@ class SizeController(
 
     suspend fun create(createSizeCommand: CreateSizeCommand) = createSizeUseCase.execute(createSizeCommand)
     suspend fun update(updateSizeCommand: UpdateSizeCommand) = updateSizeUseCase.execute(updateSizeCommand)
+    fun findAll(showDisabled: Boolean) = sizeGateway.findAll(showDisabled)
     suspend fun findById(id: UUID): Size = sizeGateway.findById(id)
         .orElseThrow { SizeNotFoundException(id) }
 

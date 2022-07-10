@@ -19,7 +19,8 @@ sealed class SizeCommand(
     @field:Max(message = "The limit of topping must be at most $MAX_TOPPING_LIMIT.", value = MAX_TOPPING_LIMIT)
     open val toppingLimit: Long = 1L,
     @field:Min(message = "The topping price must be at least $MIN_TOPPING_PRICE.", value = MIN_TOPPING_PRICE)
-    open val defaultPrice: BigDecimal = BigDecimal.valueOf(MIN_TOPPING_PRICE)
+    open val defaultPrice: BigDecimal = BigDecimal.valueOf(MIN_TOPPING_PRICE),
+    open val enabled: Boolean
 ) : Command
 
 data class DeleteSizeCommand(
@@ -32,14 +33,16 @@ data class UpdateSizeCommand(
     val id: UUID,
     override val description: String,
     override val toppingLimit: Long = 1L,
-    override val defaultPrice: BigDecimal = BigDecimal.valueOf(MIN_TOPPING_PRICE)
-) : SizeCommand(description, toppingLimit, defaultPrice)
+    override val defaultPrice: BigDecimal = BigDecimal.valueOf(MIN_TOPPING_PRICE),
+    override val enabled: Boolean = true
+) : SizeCommand(description, toppingLimit, defaultPrice, enabled)
 
 data class CreateSizeCommand(
     override val description: String,
     override val toppingLimit: Long = 1L,
-    override val defaultPrice: BigDecimal = BigDecimal.valueOf(MIN_TOPPING_PRICE)
-) : SizeCommand(description, toppingLimit, defaultPrice)
+    override val defaultPrice: BigDecimal = BigDecimal.valueOf(MIN_TOPPING_PRICE),
+    override val enabled: Boolean = true
+) : SizeCommand(description, toppingLimit, defaultPrice, enabled)
 
 private const val MIN_DESCRIPTION_SIZE = 3
 private const val MIN_TOPPING_LIMIT = 1L
